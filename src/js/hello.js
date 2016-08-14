@@ -1,7 +1,7 @@
 const Hello = React.createClass({
   render: function() {
     return (
-      <div>What is this</div>
+      <div>I am a React component</div>
     );
   }
 });
