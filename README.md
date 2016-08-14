@@ -7,7 +7,7 @@ In this tutorial we are going to:
 3. Write a build script to transpile the JSX down to JavaScript and transpile the SCSS down to CSS
 4. Write a watch script to automate the transpilation step
 5. Deploy the built files to the `gh_pages` branch
-6. Automate deployment of the built files to the `gh_branch` using Travis CI
+6. Automate deployment of the built files to the `gh_pages` using Travis CI
 
 As you work through this tutorial, remember to commit your code at the end of each section.
 
