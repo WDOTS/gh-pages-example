@@ -93,7 +93,7 @@ At the moment, to build our code, we need to manually type 2 commands into the t
 
 Open up the `package.json`. Under the `scripts` section we're going to add a new property called `build`.
 
-Let's copy-paste the commands we use earlier and add them to the `build` script. We can separate them using `&&`
+Let's copy-paste the commands we used earlier and add them to the `build` script. We can separate them using `&&`
 
 ```
   "scripts": {
@@ -195,8 +195,8 @@ We'll also need to update `index.html` to point to the new locations of the buil
 Run the `watch` script and start making changes to the source files. Make sure everything is working as expected.
 
 **A note on performance:** You may have noticed that it's really slow to delete the `build` file and rebuild it from 
-scratch every time there is a change to any of the files. I'll leave it as an exercise for you to come back later and 
-optimise the build and watch scripts.
+scratch every time there is a change to any of the files. This is clearly sub-optimal, but serves as a quick 
+demonstration. Perhaps later we can improve it.
 
 ## Build testing with Travis CI
 
