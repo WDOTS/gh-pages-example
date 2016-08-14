@@ -82,3 +82,76 @@ Let's update the `index.html` to point to the newly built file. In the `<head>`,
 ```
 
 Refresh the browser. Notice that the header has turned a tasteful shade of red.
+
+## Improving the build
+
+### One step build
+
+At the moment, to build our code, we need to manually type 2 commands into the terminal. Let's make this easier.
+
+Open up the `package.json`. Under the `scripts` section we're going to add a new property called `build`.
+
+Let's copy-paste the commands we use earlier and add them to the `build` script. We can separate them using `&&`
+
+```
+  "scripts": {
+    // ...
+    "build": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
+  }
+```
+
+Now try running the following in the terminal:
+
+```
+$ npm run build
+```
+
+Can you see what has happened? Pretty cool stuff. 
+
+You can update the name `build` to pretty much anything you want:
+
+```
+  "scripts": {
+    // ...
+    "cupcakes": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
+  }
+```
+
+You can then run:
+
+```
+$ npm run cupcakes
+```
+
+Sweet!
+
+### Watch
+
+Let's build a simple watch script that watches all our source files and runs the `build` script whenever they change.
+
+Run the following from the command line:
+
+```
+$ watch "npm run build" src/**/
+```
+
+Now make some changes to `src/js/hello.js` and `src/styles/main.scss`. Notice how when the files are changed, the build 
+script is automatically triggered.
+
+Let's add this to our `package.json` scripts:
+
+```
+  "scripts": {
+    // ...
+    "watch": "watch \"npm run build\" src/**/"
+  }
+```
+
+Now we can start the `watch` script from the command line using:
+
+```
+$ npm run watch
+```
+
+### Built code organisation
+
