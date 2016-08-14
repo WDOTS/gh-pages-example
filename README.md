@@ -198,6 +198,51 @@ Run the `watch` script and start making changes to the source files. Make sure e
 scratch every time there is a change to any of the files. I'll leave it as an exercise for you to come back later and 
 optimise the build and watch scripts.
 
+## Build testing with Travis CI
+
+Now that you have a build process, it's very useful to determine whether the process works. You can of course do this
+manually by running `npm run build` before you check in your code. But you might be collaborating with other developers
+who are unfamiliar with the codebase, or you might forget to check the build script works yourself. This is where
+automation comes in.
+
+Travis CI allows us to access GitHub webhooks. This means that when an event occurs on GitHub, such as someone raising a
+Pull Request, or pushing a commit to a particular event, Travis can run a command on one of its servers. It can, for 
+instance, clone your repo, install all of your dependencies and run your build script. Travis then notifies you as to
+whether the build script completed successfully, or whether your build is broken.
+ 
+Why might your build be broken? Perhaps your SCSS is invalid, or you have some missing dependencies, or you don't have
+the right permissions to execute a script.
+ 
+### Set up your Travis CI account
+
+  - Go to [https://travis-ci.org/](https://travis-ci.org/)
+  - Login with your GitHub account
+  - In the sidebar to the left, click `+` to add a repository
+  - Enable the `gh-pages-example` repository
+  - In the sidebar to the left, click the `gh-pages-example` repository
+
+### Add a `.travis.yml` file to the repo
+
+In the root directory of the repo, create a file called `.travis.yml`. Notice the `.` at the start of the filename.
+
+In this file, add the following:
+
+```
+language: node_js
+script: npm run build
+```
+
+Commit that and push it to GitHub. The following should happen:
+
+1. When you push, a new Travis build will be kicked off. You can monitor this in the Travis dashboard
+2. Travis will clone your repo onto one of its servers. It will install Node.js and then install your project's 
+dependencies by running `npm install`
+3. Travis will finally run `npm run build`
+
+Travis will notify GitHub of whether the build was successful. You can see this by checking the `Commits` tab in GitHub.
+There will be a green tick next to the commit it was successful, or a red cross if it was unsuccessful.
+
+
 ## Deploying to GitHub pages
 
 GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
