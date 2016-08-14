@@ -9,6 +9,8 @@ In this tutorial we are going to:
 5. Deploy the built files to the `gh_pages` branch
 6. Automate deployment of the built files to the `gh_branch` using Travis CI
 
+As you work through this tutorial, remember to commit your code at the end of each section.
+
 ## Getting started
 
 Fork this repository and then clone it.
@@ -197,3 +199,53 @@ scratch every time there is a change to any of the files. I'll leave it as an ex
 optimise the build and watch scripts.
 
 ## Deploying to GitHub pages
+
+GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
+served to requests to a special GitHub URL.
+
+You commit your code to a branch called `gh_pages`.
+
+Everything on this branch is accessible by browsing to http://*yourusername*.github.io/*yourrepository*
+
+Let's create a `gh_pages` branch and push it up to GitHub:
+
+```
+$ git checkout -b gh_pages
+$ git push
+```
+
+Now browse to http://*yourusername*.github.io/*yourrepository*. After a few seconds, you should see the website we've 
+been working on. We can call this our *production environment*. 
+
+However, there is a problem. Since the `build` directory is in our `.gitingore`, it hasn't been added to the repo and 
+we're getting `404` errors for `build/hello.js` and `build/main.css`. Let's fix this temporarily.
+
+Making sure you're still on the `gh_pages` branch, open up `.gitignore` and remove `build`. Now check in your changes
+and push to GitHub. You should no longer be getting `404` errors and your site should look the same as it does in your
+development environment.
+
+### The trouble with this approach
+
+While this approach does work, there are a couple of problems.
+
+Firstly, it requires you to commit your source code *and* your built code. This means you have to remember to run `npm 
+run build` every time you commit. This may not seem like too much of a chore, but it's easy to forget to do it. It will
+become more of an issue as your build process becomes more complex, for instance if you want to introduce the concept of 
+"development build" and a "production build", with the development build built to optimise the ability for the developer
+to debug, and the production build optimised for performance.
+
+The second problem with this approach is that there is no safety net. When you push `gh_pages`, your code has to work or
+it will break in production. This is a bit scary, especially as your site becomes more complex, the number of 
+collaborators grows and the chances of something going wrong increases.
+
+It is therefore safer and more efficient to have an automated build and deployment process that can generate the code in
+your `build` folder automatically, perform any tests or quality checks and, if everything passes, deploys your code up
+to your production environment. All these steps taken together are called the build and deployment pipeline.
+
+### Build automation
+
+Coming soon
+
+### Deployment automation
+
+Coming soon
