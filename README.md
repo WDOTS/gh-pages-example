@@ -155,3 +155,45 @@ $ npm run watch
 
 ### Built code organisation
 
+It's a bit untidy having all our built code output in the root directory. Let's give them their own folder.
+
+By convention, it is common to build our code into a directory called `build` or `dist`. Choose whichever you prefer,
+but for this tutorial we're going to call it `build`.
+
+We'll add a new script that removes the `build` directory if it exists, and then makes it again. We'll call this new
+script `clean`:
+
+```
+  "scripts": {
+    // ...
+    "clean": "rm -rf build/ && mkdir build"
+  }
+```
+
+Now let's update the build script to first run `clean`. We'll also update the output locations for our built files:
+
+```
+  "scripts": {
+    // ...
+    "build": "npm run clean && babel src/js/hello.js --out-file build/hello.js && node-sass src/styles/main.scss build/main.css"
+  }
+```
+
+We'll also need to update `index.html` to point to the new locations of the built JavaScript and CSS files:
+
+
+```
+<link rel="stylesheet" href="build/main.css">
+
+// ...
+
+<script src="build/hello.js"></script>
+```
+
+Run the `watch` script and start making changes to the source files. Make sure everything is working as expected.
+
+**A note on performance:** You may have noticed that it's really slow to delete the `build` file and rebuild it from 
+scratch every time there is a change to any of the files. I'll leave it as an exercise for you to come back later and 
+optimise the build and watch scripts.
+
+## Deploying to GitHub pages
