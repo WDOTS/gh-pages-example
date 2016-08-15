@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start -s"
+    "test": "",
+    "start": "browser-sync start -s",
+    "clean": "rm -rf build/ && mkdir build",
+    "build": "npm run clean && babel src/js/hello.js --out-file build/hello.js && node-sass src/styles/main.scss build/main.css"
   },
   "keywords": [],
   "author": "",

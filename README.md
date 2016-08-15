@@ -237,15 +237,17 @@ In this file, add the following:
 
 ```
 language: node_js
+node_js: 6
 script: npm run build
 ```
 
 Commit that and push it to GitHub. The following should happen:
 
 1. When you push, a new Travis build will be kicked off. You can monitor this in the Travis dashboard
-2. Travis will clone your repo onto one of its servers. It will install Node.js and then install your project's 
-dependencies by running `npm install`
-3. Travis will finally run `npm run build`
+2. Travis will clone your repo onto one of its servers. It will install Node.js version 6 and then install your 
+project's dependencies by running `npm install`
+3. Travis will run `npm run build`
+4. Finally Travis will attempt to run tests by running `npm test`. We don't have any tests, so this will do nothing
 
 Travis will notify GitHub of whether the build was successful. You can see this by checking the `Commits` tab in GitHub.
 There will be a green tick next to the commit it was successful, or a red cross if it was unsuccessful.
