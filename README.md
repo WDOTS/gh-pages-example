@@ -345,10 +345,6 @@ contents
 4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved 
 on Travis' server 
 
-#### Create a gh-pages branch
-
-If you haven't done so already, create a `gh-pages` branch on your GitHub repo. Make sure this branch is empty.
-
 #### The deploy script
 
 The deploy script can be found in [`scripts/deploy.sh`](scripts/deploy.sh)
