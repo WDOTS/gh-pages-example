@@ -241,6 +241,8 @@ node_js: 6
 script: npm run build
 ```
 
+### Pushing to `master`
+
 Commit that and push it to GitHub. The following should happen:
 
 1. When you push, a new Travis build will be kicked off. You can monitor this in the Travis dashboard
@@ -255,6 +257,18 @@ There will be a green tick next to the commit it was successful, or a red cross 
 Alternatively, you can check the Travis dashboard for your project 
 (http://travis-ci.org/*yourusername*/*yourrepository*). You will see a badge next to your project name that indicates
 the status of your most recent build.
+
+### Raising a pull request
+
+Now let's see what happens when you raise a pull request.
+
+First let's create a new feature branch:
+
+```
+$ git checkout -b feature-branch-test
+```
+
+Make a superficial change to the code. Perhaps update the colour of the `h1` tag in the SCSS.
 
 ## Deploying to GitHub pages
 
