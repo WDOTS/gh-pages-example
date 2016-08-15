@@ -252,6 +252,9 @@ project's dependencies by running `npm install`
 Travis will notify GitHub of whether the build was successful. You can see this by checking the `Commits` tab in GitHub.
 There will be a green tick next to the commit it was successful, or a red cross if it was unsuccessful.
 
+Alternatively, you can check the Travis dashboard for your project 
+(http://travis-ci.org/*yourusername*/*yourrepository*). You will see a badge next to your project name that indicates
+the status of your most recent build.
 
 ## Deploying to GitHub pages
 
