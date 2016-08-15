@@ -276,7 +276,18 @@ Commit your change and push the branch:
 $ git push -u origin feature-branch-test 
 ```
 
+Browse to your repo on GitHub (https://github.com/*yourusername*/*yourrepository*). Click the "New pull request" button.
+Make sure `master` is the base branch. For the compare branch, select `feature-branch-test`. Finally click "Create pull
+request".
 
+After a few seconds, you'll notice that some build checks start running. You can click through to monitor their progress
+on Travis. When the build is complete, there will be a green tick next to the check it was successful, or a red cross if
+it was unsuccessful.
+
+If the build was successful, click the "Merge pull request" button.
+
+**Note:** It is still possible to merge a pull request even if the build is failing. Think carefully before doing this
+as a failing build indicates that there could be something wrong with your code.
 
 ## Deploying to GitHub pages
 
@@ -291,11 +302,11 @@ Let's create a `gh_pages` branch and push it up to GitHub:
 
 ```
 $ git checkout -b gh_pages
-$ git push
+$ git push -u origin gh_pages
 ```
 
 Now browse to http://*yourusername*.github.io/*yourrepository*. After a few seconds, you should see the website we've 
-been working on. We can call this our *production environment*. 
+been working on. 
 
 However, there is a problem. Since the `build` directory is in our `.gitingore`, it hasn't been added to the repo and 
 we're getting `404` errors for `build/hello.js` and `build/main.css`. Let's fix this temporarily.
@@ -310,21 +321,18 @@ While this approach does work, there are a couple of problems.
 
 Firstly, it requires you to commit your source code *and* your built code. This means you have to remember to run `npm 
 run build` every time you commit. This may not seem like too much of a chore, but it's easy to forget to do it. It will
-become more of an issue as your build process becomes more complex, for instance if you want to introduce the concept of 
-"development build" and a "production build", with the development build built to optimise the ability for the developer
-to debug, and the production build optimised for performance.
+become more of an issue as your build process becomes more complex. For instance, you may want to introduce the concept 
+of a "development build" and a "production build", with the development build optimised for debugging, and the 
+production build optimised for performance.
 
 The second problem with this approach is that there is no safety net. When you push `gh_pages`, your code has to work or
 it will break in production. This is a bit scary, especially as your site becomes more complex, the number of 
 collaborators grows and the chances of something going wrong increases.
 
-It is therefore safer and more efficient to have an automated build and deployment process that can generate the code in
-your `build` folder automatically, perform any tests or quality checks and, if everything passes, deploys your code up
-to your production environment. All these steps taken together are called the build and deployment pipeline.
-
-### Build automation
-
-Coming soon
+It is therefore safer and more efficient to have an automated build and deployment process that, after you merge changes
+into `master`, can generate the code in the `build` folder automatically, perform any tests or quality checks and, if 
+everything passes, deploy your code to `gh_pages`. All these steps taken together are called the build and deployment 
+pipeline.
 
 ### Deployment automation
 
