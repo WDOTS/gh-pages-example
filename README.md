@@ -255,7 +255,7 @@ Travis will notify GitHub of whether the build was successful. You can see this 
 There will be a green tick next to the commit it was successful, or a red cross if it was unsuccessful.
 
 Alternatively, you can check the Travis dashboard for your project 
-(http://travis-ci.org/*yourusername*/*yourrepository*). You will see a badge next to your project name that indicates
+(browse to http://travis-ci.org/*yourusername*/*yourrepository*). You will see a badge next to your project name that indicates
 the status of your most recent build.
 
 ### Raising a pull request
@@ -276,7 +276,9 @@ Commit your change and push the branch:
 $ git push -u origin feature-branch-test 
 ```
 
-Browse to your repo on GitHub (https://github.com/*yourusername*/*yourrepository*). Click the "New pull request" button.
+Browse to your repo on GitHub: https://github.com/*yourusername*/*yourrepository*. 
+
+Click the "New pull request" button.
 Make sure `master` is the base branch. For the compare branch, select `feature-branch-test`. Finally click "Create pull
 request".
 
