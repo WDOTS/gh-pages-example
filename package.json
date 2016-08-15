@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "browser-sync start -s"
+    "start": "browser-sync start -s",
+    "build": "npm run clean && babel src/js/hello.js --out-file build/hello.js && node-sass src/styles/main.scss build/main.css",
+    "clean": "rm -rf build/ && mkdir build"
   },
   "keywords": [],
   "author": "",
