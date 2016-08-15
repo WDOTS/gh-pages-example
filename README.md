@@ -336,4 +336,83 @@ pipeline.
 
 ### Deployment automation
 
-Coming soon
+We are now going to write a deployment pipeline that does the following:
+
+1. When you merge your code into master, Travis kicks off a build on its server
+2. If the build passes, Travis clones our repo on its server, checks out the `gh_pages` branch and deletes all of its
+contents
+3. It then copies the contents the `build` folder and the `index.html` into its local copy of our repo
+4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved 
+on Travis' server 
+
+#### The deploy script
+
+The deploy script can be found  [`scripts/deploy.sh`](scripts/deploy.sh)
+
+I found the script [on the Internet](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd). It is not necessary for you 
+to understand in detail how exactly this script works. If you understand the 4 points above, that is enough. If you 
+don't understand them, follow this process anyway, and hopefully things will become clearer.
+
+#### Update the Travis configuration
+
+We are going to tell Travis to execute the deploy script after it has finished a build. Add the following line to your
+`.travis.yml`:
+
+```
+after_success: bash ./scripts/deploy.sh
+```
+
+#### Get encrypted credentials
+
+We need to give Travis permission to push changes to our repo, but we don't want to add any special keys or passwords to
+our repo. Travis provides a way of doing this.
+
+First, generate a new [GitHub SSH 
+key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). Don't overwrite any 
+existing SSH keys, just generate it in the current directory. Don't bother adding it to your SSH agent.
+
+[Add the key to your GitHub account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
+
+Install the [Travis CLI Ruby Gem](https://github.com/travis-ci/travis.rb#installation)
+
+Once installed, run the following command, replacing `deploy_key` witht he path to the SSH key you just generated:
+
+```
+$ travis encrypt-file deploy_key
+```
+
+You'll get something like the following message:
+
+```
+encrypting deploy_key for domenic/travis-encrypt-file-example
+storing result as deploy_key.enc
+storing secure env variables for decryption
+
+Please add the following to your build script (before_install stage in your .travis.yml, for instance):
+
+    openssl aes-256-cbc -K $encrypted_0a6446eb3ae3_key -iv $encrypted_0a6446eb3ae3_key -in super_secret.txt.enc -out super_secret.txt -d
+
+Pro Tip: You can add it automatically by running with --add.
+
+Make sure to add deploy_key.enc to the git repository.
+Make sure not to add deploy_key to the git repository.
+Commit all changes to your .travis.yml.
+```
+
+Ignore the Pro Tip. Make a note of the magic encryption label (`0a6446eb3ae3` in this example).
+
+You can now delete your `deploy_key`. Commit `deploy_key.enc` to the repo. It's encrypted and safe.
+
+Finally, we need to make one more change to `.travis.yml`:
+
+```
+env:
+  global:
+  - ENCRYPTION_LABEL: "<.... encryption label from previous step ....>"
+  - COMMIT_AUTHOR_EMAIL: "you@example.com"
+```
+
+Commit all of these changes. Push to GitHub. When the build has finished, assuming it passed, check your `gh_pages` 
+branch. You should see that it contains only your `index.html` and `build` directory.
+
+Browse to http://*yourusername*.github.io/*yourrepository* and see if it worked.
