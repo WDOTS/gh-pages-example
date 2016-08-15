@@ -270,6 +270,14 @@ $ git checkout -b feature-branch-test
 
 Make a superficial change to the code. Perhaps update the colour of the `h1` tag in the SCSS.
 
+Commit your change and push the branch:
+
+```
+$ git push -u origin feature-branch-test 
+```
+
+
+
 ## Deploying to GitHub pages
 
 GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
