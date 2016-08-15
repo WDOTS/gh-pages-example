@@ -6,8 +6,8 @@ In this tutorial we are going to:
 2. Apply some styling using SCSS
 3. Write a build script to transpile the JSX down to JavaScript and transpile the SCSS down to CSS
 4. Write a watch script to automate the transpilation step
-5. Deploy the built files to the `gh_pages` branch
-6. Automate deployment of the built files to the `gh_pages` using Travis CI
+5. Deploy the built files to the `gh-pages` branch
+6. Automate deployment of the built files to the `gh-pages` using Travis CI
 
 As you work through this tutorial, remember to commit your code at the end of each section.
 
@@ -294,15 +294,15 @@ as a failing build indicates that there could be something wrong with your code.
 GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
 served to requests to a special GitHub URL.
 
-You commit your code to a branch called `gh_pages`.
+You commit your code to a branch called `gh-pages`.
 
 Everything on this branch is accessible by browsing to http://*yourusername*.github.io/*yourrepository*
 
-Let's create a `gh_pages` branch and push it up to GitHub:
+Let's create a `gh-pages` branch and push it up to GitHub:
 
 ```
-$ git checkout -b gh_pages
-$ git push -u origin gh_pages
+$ git checkout -b gh-pages
+$ git push -u origin gh-pages
 ```
 
 Now browse to http://*yourusername*.github.io/*yourrepository*. After a few seconds, you should see the website we've 
@@ -311,7 +311,7 @@ been working on.
 However, there is a problem. Since the `build` directory is in our `.gitingore`, it hasn't been added to the repo and 
 we're getting `404` errors for `build/hello.js` and `build/main.css`. Let's fix this temporarily.
 
-Making sure you're still on the `gh_pages` branch, open up `.gitignore` and remove `build`. Now check in your changes
+Making sure you're still on the `gh-pages` branch, open up `.gitignore` and remove `build`. Now check in your changes
 and push to GitHub. You should no longer be getting `404` errors and your site should look the same as it does in your
 development environment.
 
@@ -325,13 +325,13 @@ become more of an issue as your build process becomes more complex. For instance
 of a "development build" and a "production build", with the development build optimised for debugging, and the 
 production build optimised for performance.
 
-The second problem with this approach is that there is no safety net. When you push `gh_pages`, your code has to work or
+The second problem with this approach is that there is no safety net. When you push `gh-pages`, your code has to work or
 it will break in production. This is a bit scary, especially as your site becomes more complex, the number of 
 collaborators grows and the chances of something going wrong increases.
 
 It is therefore safer and more efficient to have an automated build and deployment process that, after you merge changes
 into `master`, can generate the code in the `build` folder automatically, perform any tests or quality checks and, if 
-everything passes, deploy your code to `gh_pages`. All these steps taken together are called the build and deployment 
+everything passes, deploy your code to `gh-pages`. All these steps taken together are called the build and deployment 
 pipeline.
 
 ### Deployment automation
@@ -339,11 +339,15 @@ pipeline.
 We are now going to write a deployment pipeline that does the following:
 
 1. When you merge your code into master, Travis kicks off a build on its server
-2. If the build passes, Travis clones our repo on its server, checks out the `gh_pages` branch and deletes all of its
+2. If the build passes, Travis clones our repo on its server, checks out the `gh-pages` branch and deletes all of its
 contents
 3. It then copies the contents the `build` folder and the `index.html` into its local copy of our repo
 4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved 
 on Travis' server 
+
+#### Create a gh-pages branch
+
+If you haven't done so already, create a `gh-pages` branch on your GitHub repo. Make sure this branch is empty.
 
 #### The deploy script
 
@@ -415,7 +419,7 @@ env:
   - COMMIT_AUTHOR_EMAIL: "you@example.com"
 ```
 
-Commit all of these changes. Push to GitHub. When the build has finished, assuming it passed, check your `gh_pages` 
+Commit all of these changes. Push to GitHub. When the build has finished, assuming it passed, check your `gh-pages` 
 branch. You should see that it contains only your `index.html` and `build` directory.
 
 Browse to http://*yourusername*.github.io/*yourrepository* and see if it worked.
