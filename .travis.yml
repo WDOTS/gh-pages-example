@@ -1,0 +1,8 @@
+language: node_js
+node_js: 6
+script: npm run build
+after_success: bash ./scripts/deploy.sh
+env:
+  global:
+  - ENCRYPTION_LABEL: "11b6d7c99a1f"
+  - COMMIT_AUTHOR_EMAIL: "simonadcock2@gmail.com"

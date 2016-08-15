@@ -347,7 +347,7 @@ on Travis' server
 
 #### The deploy script
 
-The deploy script can be found  [`scripts/deploy.sh`](scripts/deploy.sh)
+The deploy script can be found in [`scripts/deploy.sh`](scripts/deploy.sh)
 
 I found the script [on the Internet](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd). It is not necessary for you 
 to understand in detail how exactly this script works. If you understand the 4 points above, that is enough. If you 
@@ -364,8 +364,8 @@ after_success: bash ./scripts/deploy.sh
 
 #### Get encrypted credentials
 
-We need to give Travis permission to push changes to our repo, but we don't want to add any special keys or passwords to
-our repo. Travis provides a way of doing this.
+You need to give Travis permission to push changes to our repo, but you don't want to add any special keys or passwords 
+to your repo. Travis provides a way of doing this.
 
 First, generate a new [GitHub SSH 
 key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). Don't overwrite any 
@@ -375,16 +375,18 @@ existing SSH keys, just generate it in the current directory. Don't bother addin
 
 Install the [Travis CLI Ruby Gem](https://github.com/travis-ci/travis.rb#installation)
 
-Once installed, run the following command, replacing `deploy_key` witht he path to the SSH key you just generated:
+Once installed, run the following command, replacing `deploy_key` with the path to the SSH key you just generated:
 
 ```
 $ travis encrypt-file deploy_key
 ```
 
-You'll get something like the following message:
+You may first need to login to Travis using your GitHUb credentials. If so, follow the instructions in the terminal.
+
+Eventually, you'll get something like the following message:
 
 ```
-encrypting deploy_key for domenic/travis-encrypt-file-example
+encrypting deploy_key for WDOTS/gh-pages-example
 storing result as deploy_key.enc
 storing secure env variables for decryption
 
