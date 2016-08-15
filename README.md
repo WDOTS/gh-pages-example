@@ -369,7 +369,8 @@ to your repo. Travis provides a way of doing this.
 
 First, generate a new [GitHub SSH 
 key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). Don't overwrite any 
-existing SSH keys, just generate it in the current directory. Don't bother adding it to your SSH agent.
+existing SSH keys, just generate it in the current directory. Don't enter a password for this key. Don't bother adding 
+it to your SSH agent.
 
 [Add the key to your GitHub account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
