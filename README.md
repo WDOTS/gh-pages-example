@@ -21,6 +21,14 @@ Install the project dependencies:
 $ npm install
 ```
 
+This will automatically install the following:
+
+- babel-cli
+- babel-preset-react
+- node-sass
+- browser-sync
+- watch
+
 Start the dev server:
 
 ```
@@ -217,7 +225,7 @@ the right permissions to execute a script.
 
   - Go to [https://travis-ci.org/](https://travis-ci.org/)
   - Login with your GitHub account
-  - In the sidebar to the left, click `+` to add a repository
+  - In the sidebar to the left, click `+` next to "My Repositories"
   - Enable the `gh-pages-example` repository
   - In the sidebar to the left, click the `gh-pages-example` repository
 
