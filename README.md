@@ -214,7 +214,7 @@ who are unfamiliar with the codebase, or you might forget to check the build scr
 automation comes in.
 
 Travis CI allows us to access GitHub webhooks. This means that when an event occurs on GitHub, such as someone raising a
-Pull Request, or pushing a commit to a particular event, Travis can run a command on one of its servers. It can, for 
+Pull Request, or pushing a commit to a particular branch, Travis can run a command on one of its servers. It can, for 
 instance, clone your repo, install all of your dependencies and run your build script. Travis then notifies you as to
 whether the build script completed successfully, or whether your build is broken.
  
