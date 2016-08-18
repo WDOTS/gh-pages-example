@@ -374,6 +374,9 @@ it to your SSH agent.
 
 [Add the key to your GitHub account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
+**Note:** the Travis CLI tool may not work on Windows. If you can't get it working, ask someone with a Mac or Linux
+machine to generate the encrypted key and encryption label for you.
+
 Install the [Travis CLI Ruby Gem](https://github.com/travis-ci/travis.rb#installation)
 
 Once installed, run the following command, replacing `deploy_key` with the path to the SSH key you just generated:
@@ -382,7 +385,7 @@ Once installed, run the following command, replacing `deploy_key` with the path 
 $ travis encrypt-file deploy_key
 ```
 
-You may first need to login to Travis using your GitHUb credentials. If so, follow the instructions in the terminal.
+You may first need to login to Travis using your GitHub credentials. If so, follow the instructions in the terminal.
 
 Eventually, you'll get something like the following message:
 
