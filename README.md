@@ -422,3 +422,15 @@ Commit all of these changes. Push to GitHub. When the build has finished, assumi
 branch. You should see that it contains only your `index.html` and `build` directory.
 
 Browse to http://*yourusername*.github.io/*yourrepository* and see if it worked.
+
+#### A note on security
+
+This configuration gives Travis write access to your GitHub repo. If someone was to edit the `deploy.sh` script to do 
+something malicious, and then raise a pull request against your repo, Travis would blindly run the script. This is 
+called a Confused Deputy attack.
+
+In order to prevent this, you should go into the Travis settings for your repo and disable the "build on pull request"
+switch. Now the build will only run when someone pushes to your repo, and you have full control over who has permission
+to push to your repo.
+
+Thanks to [James Monger](https://github.com/jameskmonger) for spotting this vulnerability.
