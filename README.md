@@ -1,5 +1,31 @@
 # GitHub Pages Example
 
+## Contents
+
+- Introduction
+- Getting started
+- Transpiling the JSX down to JavaScript
+- Transpiling the SCSS down to CSS
+- Improving the build
+  - One step build
+  - Watch
+  - Built code organisation
+- Build testing with Travis CI
+  - Set up your Travis CI account
+  - Add a `.travis.yml` file to the repo
+  - Pushing to `master`
+  - Raising a pull request
+- Deploying to GitHub pages
+  - Manual deploy to `gh-pages`
+  - The trouble with this approach
+  - Deployment automation
+    - The deploy script
+    - Update the Travis configuration
+    - Get encrypted credentials
+    - A note on security
+
+## Introduction
+
 In this tutorial we are going to:
 
 1. Create a simple React application
@@ -290,6 +316,8 @@ If the build was successful, click the "Merge pull request" button.
 as a failing build indicates that there could be something wrong with your code.
 
 ## Deploying to GitHub pages
+
+### Manual deploy to `gh-pages`
 
 GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
 served to requests to a special GitHub URL.
