@@ -2,29 +2,29 @@
 
 ## Contents
 
-- Introduction
-- Getting started
-- Transpiling the JSX down to JavaScript
-- Transpiling the SCSS down to CSS
-- Improving the build
-  - One step build
-  - Watch
-  - Built code organisation
-- Build testing with Travis CI
-  - Set up your Travis CI account
-  - Add a `.travis.yml` file to the repo
-  - Pushing to `master`
-  - Raising a pull request
-- Deploying to GitHub pages
-  - Manual deploy to `gh-pages`
-  - The trouble with this approach
-  - Deployment automation
-    - The deploy script
-    - Update the Travis configuration
-    - Get encrypted credentials
-    - A note on security
+- [Introduction](#introduction)
+- [Getting started](#getting-started)
+- [Transpiling the JSX down to JavaScript](#transpiling-jsx)
+- [Transpiling the SCSS down to CSS](#transpiling-scss)
+- [Improving the build](#improving-the-build)
+  - [One step build](#one-step-build)
+  - [Watch](#watch)
+  - [Built code organisation](#built-code-organisation)
+- [Build testing with Travis CI](#travis-ci)
+  - [Set up your Travis CI account](#setup-travis-ci-account)
+  - [Add a `.travis.yml` file to the repo](#travis-yml)
+  - [Pushing to `master`](#pushing-to-master)
+  - [Raising a pull request](#pull-request)
+- [Deploying to GitHub pages](#deploying-to-gh-pages)
+  - [Manual deploy to `gh-pages`](#manual-deploy)
+  - [The trouble with this approach](#trouble-with-this-approach)
+  - [Deployment automation](#deployment-automation)
+    - [The deploy script](#deploy-script)
+    - [Update the Travis configuration](#update-travis-config)
+    - [Get encrypted credentials](#get-encrypted-credentials)
+    - [A note on security](#security)
 
-## Introduction
+## <a name="introduction"></a>Introduction
 
 In this tutorial we are going to:
 
@@ -37,7 +37,7 @@ In this tutorial we are going to:
 
 As you work through this tutorial, remember to commit your code at the end of each section.
 
-## Getting started
+## <a name="getting-started"></a>Getting started
 
 Fork this repository and then clone it.
 
@@ -69,7 +69,7 @@ Notice the error you are getting in the console:
 
 This is because we are trying to load untranspiled JSX into the browser. Let's sort this out.
 
-## Transpiling the JSX down to JavaScript
+## <a name="transpiling-jsx"></a>Transpiling the JSX down to JavaScript
 
 We are going to use the Babel CLI to transpile the JSX down to vanilla JavaScript.
 
@@ -99,7 +99,7 @@ Let's update the `index.html` to point to the built file instead of the pristine
 
 Refresh the browser. You should now see the React component on the page, with no errors in the console.
 
-## Transpiling the SCSS down to CSS
+## <a name="transpiling-scss"></a>Transpiling the SCSS down to CSS
 
 We are going to use the node-sass CLI to transpile the SCSS down to vanilla CSS.
 
@@ -119,9 +119,9 @@ Let's update the `index.html` to point to the newly built file. In the `<head>`,
 
 Refresh the browser. Notice that the header has turned a tasteful shade of red.
 
-## Improving the build
+## <a name="improving-the-build"></a>Improving the build
 
-### One step build
+### <a name="one-step-build"></a>One step build
 
 At the moment, to build our code, we need to manually type 2 commands into the terminal. Let's make this easier.
 
@@ -161,7 +161,7 @@ $ npm run cupcakes
 
 Sweet!
 
-### Watch
+### <a name="watch"></a>Watch
 
 Let's build a simple watch script that watches all our source files and runs the `build` script whenever they change.
 
@@ -189,7 +189,7 @@ Now we can start the `watch` script from the command line using:
 $ npm run watch
 ```
 
-### Built code organisation
+### <a name="built-code-organisation"></a>Built code organisation
 
 It's a bit untidy having all our built code output in the root directory. Let's give them their own folder.
 
@@ -232,7 +232,7 @@ Run the `watch` script and start making changes to the source files. Make sure e
 scratch every time there is a change to any of the files. This is clearly sub-optimal, but serves as a quick 
 demonstration. Perhaps later we can improve it.
 
-## Build testing with Travis CI
+## <a name="travis-ci"></a>Build testing with Travis CI
 
 Now that you have a build process, it's very useful to determine whether the process works. You can of course do this
 manually by running `npm run build` before you check in your code. But you might be collaborating with other developers
@@ -247,7 +247,7 @@ whether the build script completed successfully, or whether your build is broken
 Why might your build be broken? Perhaps your SCSS is invalid, or you have some missing dependencies, or you don't have
 the right permissions to execute a script.
  
-### Set up your Travis CI account
+### <a name="setup-travis-ci-account"></a>Set up your Travis CI account
 
   - Go to [https://travis-ci.org/](https://travis-ci.org/)
   - Login with your GitHub account
@@ -255,7 +255,7 @@ the right permissions to execute a script.
   - Enable the `gh-pages-example` repository
   - In the sidebar to the left, click the `gh-pages-example` repository
 
-### Add a `.travis.yml` file to the repo
+### <a name="travis-yml"></a>Add a `.travis.yml` file to the repo
 
 In the root directory of the repo, create a file called `.travis.yml`. Notice the `.` at the start of the filename.
 
@@ -267,7 +267,7 @@ node_js: 6
 script: npm run build
 ```
 
-### Pushing to `master`
+### <a name="pushing-to-master"></a>Pushing to `master`
 
 Commit that and push it to GitHub. The following should happen:
 
@@ -283,7 +283,7 @@ There will be a green tick next to the commit it was successful, or a red cross 
 Alternatively, you can check the Travis dashboard for your project (browse to `http://travis-ci.org/*yourusername*/*yourrepository*`). You will see a badge next to your project name that 
 indicates the status of your most recent build.
 
-### Raising a pull request
+### <a name="pull-request"></a>Raising a pull request
 
 Now let's see what happens when you raise a pull request.
 
@@ -315,9 +315,9 @@ If the build was successful, click the "Merge pull request" button.
 **Note:** It is still possible to merge a pull request even if the build is failing. Think carefully before doing this
 as a failing build indicates that there could be something wrong with your code.
 
-## Deploying to GitHub pages
+## <a name="deploying-to-gh-pages"></a>Deploying to GitHub pages
 
-### Manual deploy to `gh-pages`
+### <a name="manual-deploy"></a>Manual deploy to `gh-pages`
 
 GitHub pages allows you to commit your code to a special branch in your repository, and anything on that branch is then
 served to requests to a special GitHub URL.
@@ -343,7 +343,7 @@ Making sure you're still on the `gh-pages` branch, open up `.gitignore` and remo
 and push to GitHub. You should no longer be getting `404` errors and your site should look the same as it does in your
 development environment.
 
-### The trouble with this approach
+### <a name="trouble-with-this-approach"></a>The trouble with this approach
 
 While this approach does work, there are a couple of problems.
 
@@ -362,7 +362,7 @@ into `master`, can generate the code in the `build` folder automatically, perfor
 everything passes, deploy your code to `gh-pages`. All these steps taken together are called the build and deployment 
 pipeline.
 
-### Deployment automation
+### <a name="deployment-automation"></a>Deployment automation
 
 We are now going to write a deployment pipeline that does the following:
 
@@ -373,7 +373,7 @@ contents
 4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved 
 on Travis' server 
 
-#### The deploy script
+#### <a name="deploy-script"></a>The deploy script
 
 The deploy script can be found in [`scripts/deploy.sh`](scripts/deploy.sh)
 
@@ -381,7 +381,7 @@ I found the script [on the Internet](https://gist.github.com/domenic/ec8b0fc8ab4
 to understand in detail how exactly this script works. If you understand the 4 points above, that is enough. If you 
 don't understand them, follow this process anyway, and hopefully things will become clearer.
 
-#### Update the Travis configuration
+#### <a name="update-travis-config"></a>Update the Travis configuration
 
 We are going to tell Travis to execute the deploy script after it has finished a build. Add the following line to your
 `.travis.yml`:
@@ -390,7 +390,7 @@ We are going to tell Travis to execute the deploy script after it has finished a
 after_success: bash ./scripts/deploy.sh
 ```
 
-#### Get encrypted credentials
+#### <a name="get-encrypted-credentials"></a>Get encrypted credentials
 
 You need to give Travis permission to push changes to our repo, but you don't want to add any special keys or passwords 
 to your repo. Travis provides a way of doing this.
@@ -451,7 +451,7 @@ branch. You should see that it contains only your `index.html` and `build` direc
 
 Browse to http://*yourusername*.github.io/*yourrepository* and see if it worked.
 
-#### A note on security
+#### <a name="security"></a>A note on security
 
 This configuration gives Travis write access to your GitHub repo. If someone was to edit the `deploy.sh` script to do 
 something malicious, and then raise a pull request against your repo, Travis would blindly run the script. This is 
