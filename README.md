@@ -63,7 +63,7 @@ $ npm start
 
 You can access the dev server by browsing to [http://localhost:3000](http://localhost:3000)
 
-Notice the error you are getting in the console:
+Open dev tools in your browser of choice. Notice the error you are getting in the console:
 
 > hello.js:4 Uncaught SyntaxError: Unexpected token <
 
@@ -84,7 +84,7 @@ First we need to create `.babelrc` file, that will contain the configuration for
 Now let's try running Babel CLI to do the actual transpiling:
 
 ```
-$ babel src/js/hello.js --out-file hello.js
+$ ./node_modules/.bin/babel src/js/hello.js --out-file hello.js
 ```
 
 Notice that after you run this, a new file called `hello.js` is created in the root directory.
@@ -104,7 +104,7 @@ Refresh the browser. You should now see the React component on the page, with no
 We are going to use the node-sass CLI to transpile the SCSS down to vanilla CSS.
 
 ```
-$ node-sass src/styles/main.scss main.css
+$ ./node_modules/.bin/node-sass src/styles/main.scss main.css
 ```
 
 Notice that after you run this, a new file called `main.css` is created in the root directory.
@@ -132,7 +132,7 @@ Let's copy-paste the commands we used earlier and add them to the `build` script
 ```
   "scripts": {
     // ...
-    "build": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
+    "build": "./node_modules/.bin/babel src/js/hello.js --out-file hello.js && ./node_modules/.bin/node-sass src/styles/main.scss main.css"
   }
 ```
 
@@ -149,7 +149,7 @@ You can update the name `build` to pretty much anything you want:
 ```
   "scripts": {
     // ...
-    "cupcakes": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
+    "cupcakes": "./node_modules/.bin/babel src/js/hello.js --out-file hello.js && ./node_modules/.bin/node-sass src/styles/main.scss main.css"
   }
 ```
 
@@ -159,7 +159,7 @@ You can then run:
 $ npm run cupcakes
 ```
 
-Sweet!
+Sweet! Although a bit silly. Let's change that script name back to `build` :)
 
 ### <a name="watch"></a>Watch
 
@@ -168,7 +168,7 @@ Let's build a simple watch script that watches all our source files and runs the
 Run the following from the command line:
 
 ```
-$ watch "npm run build" src/**/
+$ ./node_modules/.bin/watch "npm run build" src/**/
 ```
 
 Now make some changes to `src/js/hello.js` and `src/styles/main.scss`. Notice how when the files are changed, the build 
@@ -179,7 +179,7 @@ Let's add this to our `package.json` scripts:
 ```
   "scripts": {
     // ...
-    "watch": "watch \"npm run build\" src/**/"
+    "watch": "./node_modules/.bin/watch \"npm run build\" src/**/"
   }
 ```
 
@@ -211,7 +211,7 @@ Now let's update the build script to first run `clean`. We'll also update the ou
 ```
   "scripts": {
     // ...
-    "build": "npm run clean && babel src/js/hello.js --out-file build/hello.js && node-sass src/styles/main.scss build/main.css"
+    "build": "npm run clean && ./node_modules/.bin/babel src/js/hello.js --out-file build/hello.js && ./node_modules/.bin/node-sass src/styles/main.scss build/main.css"
   }
 ```
 
