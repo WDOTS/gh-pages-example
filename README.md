@@ -132,9 +132,13 @@ Let's copy-paste the commands we used earlier and add them to the `build` script
 ```
   "scripts": {
     // ...
-    "build": "./node_modules/.bin/babel src/js/hello.js --out-file hello.js && ./node_modules/.bin/node-sass src/styles/main.scss main.css"
+    "build": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
   }
 ```
+
+**Side note:** when you run a command from the `scripts` section of `package.json`, you don't need to include the 
+`./node_modules/.bin/` part of the path to the dependency. So in the above example, we can just call `babel` rather than 
+`./node_mmodules/.bin/babel`. npm infers the path automatically.
 
 Now try running the following in the terminal:
 
@@ -144,12 +148,13 @@ $ npm run build
 
 Can you see what has happened? Pretty cool stuff. 
 
+
 You can update the name `build` to pretty much anything you want:
 
 ```
   "scripts": {
     // ...
-    "cupcakes": "./node_modules/.bin/babel src/js/hello.js --out-file hello.js && ./node_modules/.bin/node-sass src/styles/main.scss main.css"
+    "cupcakes": "babel src/js/hello.js --out-file hello.js && node-sass src/styles/main.scss main.css"
   }
 ```
 
@@ -179,7 +184,7 @@ Let's add this to our `package.json` scripts:
 ```
   "scripts": {
     // ...
-    "watch": "./node_modules/.bin/watch \"npm run build\" src/**/"
+    "watch": "watch \"npm run build\" src/**/"
   }
 ```
 
@@ -211,7 +216,7 @@ Now let's update the build script to first run `clean`. We'll also update the ou
 ```
   "scripts": {
     // ...
-    "build": "npm run clean && ./node_modules/.bin/babel src/js/hello.js --out-file build/hello.js && ./node_modules/.bin/node-sass src/styles/main.scss build/main.css"
+    "build": "npm run clean && babel src/js/hello.js --out-file build/hello.js && node-sass src/styles/main.scss build/main.css"
   }
 ```
 
