@@ -136,8 +136,8 @@ Let's copy-paste the commands we used earlier and add them to the `build` script
   }
 ```
 
-**Side note:** when you run a command from the `scripts` section of `package.json`, you don't need to include the 
-`./node_modules/.bin/` part of the path to the dependency. So in the above example, we can just call `babel` rather than 
+**Side note:** when you run a command from the `scripts` section of `package.json`, you don't need to include the
+`./node_modules/.bin/` part of the path to the dependency. So in the above example, we can just call `babel` rather than
 `./node_mmodules/.bin/babel`. npm infers the path automatically.
 
 Now try running the following in the terminal:
@@ -146,7 +146,7 @@ Now try running the following in the terminal:
 $ npm run build
 ```
 
-Can you see what has happened? Pretty cool stuff. 
+Can you see what has happened? Pretty cool stuff.
 
 
 You can update the name `build` to pretty much anything you want:
@@ -173,10 +173,10 @@ Let's build a simple watch script that watches all our source files and runs the
 Run the following from the command line:
 
 ```
-$ ./node_modules/.bin/watch "npm run build" src/**/
+$ ./node_modules/.bin/watch "npm run build" src/
 ```
 
-Now make some changes to `src/js/hello.js` and `src/styles/main.scss`. Notice how when the files are changed, the build 
+Now make some changes to `src/js/hello.js` and `src/styles/main.scss`. Notice how when the files are changed, the build
 script is automatically triggered.
 
 Let's add this to our `package.json` scripts:
@@ -184,7 +184,7 @@ Let's add this to our `package.json` scripts:
 ```
   "scripts": {
     // ...
-    "watch": "watch \"npm run build\" src/**/"
+    "watch": "watch \"npm run build\" src/"
   }
 ```
 
@@ -233,8 +233,8 @@ We'll also need to update `index.html` to point to the new locations of the buil
 
 Run the `watch` script and start making changes to the source files. Make sure everything is working as expected.
 
-**A note on performance:** You may have noticed that it's really slow to delete the `build` file and rebuild it from 
-scratch every time there is a change to any of the files. This is clearly sub-optimal, but serves as a quick 
+**A note on performance:** You may have noticed that it's really slow to delete the `build` file and rebuild it from
+scratch every time there is a change to any of the files. This is clearly sub-optimal, but serves as a quick
 demonstration. Perhaps later we can improve it.
 
 ## <a name="travis-ci"></a>Build testing with Travis CI
@@ -245,13 +245,13 @@ who are unfamiliar with the codebase, or you might forget to check the build scr
 automation comes in.
 
 Travis CI allows us to access GitHub webhooks. This means that when an event occurs on GitHub, such as someone raising a
-Pull Request, or pushing a commit to a particular branch, Travis can run a command on one of its servers. It can, for 
+Pull Request, or pushing a commit to a particular branch, Travis can run a command on one of its servers. It can, for
 instance, clone your repo, install all of your dependencies and run your build script. Travis then notifies you as to
 whether the build script completed successfully, or whether your build is broken.
- 
+
 Why might your build be broken? Perhaps your SCSS is invalid, or you have some missing dependencies, or you don't have
 the right permissions to execute a script.
- 
+
 ### <a name="setup-travis-ci-account"></a>Set up your Travis CI account
 
   - Go to [https://travis-ci.org/](https://travis-ci.org/)
@@ -277,7 +277,7 @@ script: npm run build
 Commit that and push it to GitHub. The following should happen:
 
 1. When you push, a new Travis build will be kicked off. You can monitor this in the Travis dashboard
-2. Travis will clone your repo onto one of its servers. It will install Node.js version 6 and then install your 
+2. Travis will clone your repo onto one of its servers. It will install Node.js version 6 and then install your
 project's dependencies by running `npm install`
 3. Travis will run `npm run build`
 4. Finally Travis will attempt to run tests by running `npm test`. We don't have any tests, so this will do nothing
@@ -285,8 +285,8 @@ project's dependencies by running `npm install`
 Travis will notify GitHub of whether the build was successful. You can see this by checking the `Commits` tab in GitHub.
 There will be a green tick next to the commit it was successful, or a red cross if it was unsuccessful.
 
-Alternatively, you can check the Travis dashboard for your project (browse to 
-`http://travis-ci.org/*yourusername*/*yourrepository*`). You will see a badge next to your project name that indicates 
+Alternatively, you can check the Travis dashboard for your project (browse to
+`http://travis-ci.org/*yourusername*/*yourrepository*`). You will see a badge next to your project name that indicates
 the status of your most recent build.
 
 ### <a name="pull-request"></a>Raising a pull request
@@ -304,14 +304,14 @@ Make a superficial change to the code. Perhaps update the colour of the `h1` tag
 Commit your change and push the branch:
 
 ```
-$ git push -u origin feature-branch-test 
+$ git push -u origin feature-branch-test
 ```
 
-Browse to your repo on GitHub (`https://github.com/*yourusername*/*yourrepository*`). Click the "New pull request" 
+Browse to your repo on GitHub (`https://github.com/*yourusername*/*yourrepository*`). Click the "New pull request"
 button.
 
 Change the base fork to be `*your username*/gh-pages-example`. Make sure `master` is the base branch. Make sure the head
-fork is set to `*your username*/gh-pages-example`. For the compare branch, select `feature-branch-test`. Finally click 
+fork is set to `*your username*/gh-pages-example`. For the compare branch, select `feature-branch-test`. Finally click
 "Create pull request".
 
 After a few seconds, you'll notice that some build checks start running. You can click through to monitor their progress
@@ -341,10 +341,10 @@ $ git checkout -b gh-pages
 $ git push -u origin gh-pages
 ```
 
-Now browse to http://*yourusername*.github.io/*yourrepository*. After a few seconds, you should see the website we've 
-been working on. 
+Now browse to http://*yourusername*.github.io/*yourrepository*. After a few seconds, you should see the website we've
+been working on.
 
-However, there is a problem. Since the `build` directory is in our `.gitingore`, it hasn't been added to the repo and 
+However, there is a problem. Since the `build` directory is in our `.gitingore`, it hasn't been added to the repo and
 we're getting `404` errors for `build/hello.js` and `build/main.css`. Let's fix this temporarily.
 
 Making sure you're still on the `gh-pages` branch, open up `.gitignore` and remove `build`. Now check in your changes
@@ -355,19 +355,19 @@ development environment.
 
 While this approach does work, there are a couple of problems.
 
-Firstly, it requires you to commit your source code *and* your built code. This means you have to remember to run `npm 
+Firstly, it requires you to commit your source code *and* your built code. This means you have to remember to run `npm
 run build` every time you commit. This may not seem like too much of a chore, but it's easy to forget to do it. It will
-become more of an issue as your build process becomes more complex. For instance, you may want to introduce the concept 
-of a "development build" and a "production build", with the development build optimised for debugging, and the 
+become more of an issue as your build process becomes more complex. For instance, you may want to introduce the concept
+of a "development build" and a "production build", with the development build optimised for debugging, and the
 production build optimised for performance.
 
 The second problem with this approach is that there is no safety net. When you push `gh-pages`, your code has to work or
-it will break in production. This is a bit scary, especially as your site becomes more complex, the number of 
+it will break in production. This is a bit scary, especially as your site becomes more complex, the number of
 collaborators grows and the chances of something going wrong increases.
 
 It is therefore safer and more efficient to have an automated build and deployment process that, after you merge changes
-into `master`, can generate the code in the `build` folder automatically, perform any tests or quality checks and, if 
-everything passes, deploy your code to `gh-pages`. All these steps taken together are called the build and deployment 
+into `master`, can generate the code in the `build` folder automatically, perform any tests or quality checks and, if
+everything passes, deploy your code to `gh-pages`. All these steps taken together are called the build and deployment
 pipeline.
 
 ### <a name="deployment-automation"></a>Deployment automation
@@ -378,15 +378,15 @@ We are now going to write a deployment pipeline that does the following:
 2. If the build passes, Travis clones our repo on its server, checks out the `gh-pages` branch and deletes all of its
 contents
 3. It then copies the contents the `build` folder and the `index.html` into its local copy of our repo
-4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved 
-on Travis' server 
+4. If anything has changed, Travis commits the changes and pushes them up to GitHub using a secure token that is saved
+on Travis' server
 
 #### <a name="deploy-script"></a>The deploy script
 
 The deploy script can be found in [`scripts/deploy.sh`](scripts/deploy.sh)
 
-I found the script [on the Internet](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd). It is not necessary for you 
-to understand in detail how exactly this script works. If you understand the 4 points above, that is enough. If you 
+I found the script [on the Internet](https://gist.github.com/domenic/ec8b0fc8ab45f39403dd). It is not necessary for you
+to understand in detail how exactly this script works. If you understand the 4 points above, that is enough. If you
 don't understand them, follow this process anyway, and hopefully things will become clearer.
 
 #### <a name="update-travis-config"></a>Update the Travis configuration
@@ -400,12 +400,12 @@ after_success: bash ./scripts/deploy.sh
 
 #### <a name="get-encrypted-credentials"></a>Get encrypted credentials
 
-You need to give Travis permission to push changes to our repo, but you don't want to add any special keys or passwords 
+You need to give Travis permission to push changes to our repo, but you don't want to add any special keys or passwords
 to your repo. Travis provides a way of doing this.
 
-First, generate a new [GitHub SSH 
-key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). Don't overwrite any 
-existing SSH keys, just generate it in the current directory. Don't enter a password for this key. Don't bother adding 
+First, generate a new [GitHub SSH
+key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). Don't overwrite any
+existing SSH keys, just generate it in the current directory. Don't enter a password for this key. Don't bother adding
 it to your SSH agent.
 
 [Add the key to your GitHub account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
@@ -454,15 +454,15 @@ env:
   - COMMIT_AUTHOR_EMAIL: "you@example.com"
 ```
 
-Commit all of these changes. Push to GitHub. When the build has finished, assuming it passed, check your `gh-pages` 
+Commit all of these changes. Push to GitHub. When the build has finished, assuming it passed, check your `gh-pages`
 branch. You should see that it contains only your `index.html` and `build` directory.
 
 Browse to http://*yourusername*.github.io/*yourrepository* and see if it worked.
 
 #### <a name="security"></a>A note on security
 
-This configuration gives Travis write access to your GitHub repo. If someone was to edit the `deploy.sh` script to do 
-something malicious, and then raise a pull request against your repo, Travis would blindly run the script. This is 
+This configuration gives Travis write access to your GitHub repo. If someone was to edit the `deploy.sh` script to do
+something malicious, and then raise a pull request against your repo, Travis would blindly run the script. This is
 called a Confused Deputy attack.
 
 In order to prevent this, you should go into the Travis settings for your repo and disable the "build on pull request"
